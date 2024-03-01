@@ -1,0 +1,26 @@
+const recipes = [
+    { name: "Pasta Carbonara", ingredients: ["pasta", "eggs", "bacon", "cheese"] },
+    { name: "Caprese Salad", ingredients: ["tomatoes", "mozzarella", "basil", "olive oil"] },
+    { name: "Guacamole", ingredients: ["avocado", "lime", "onion", "tomato"] }
+];
+
+function searchRecipes() {
+    const ingredientInput = document.getElementById("ingredient-input");
+    const searchTerm = ingredientInput.value.toLowerCase();
+    
+    const matchingRecipes = recipes.filter(recipe =>
+        recipe.ingredients.some(ingredient => ingredient.toLowerCase().includes(searchTerm))
+    );
+
+    const recipeResults = document.getElementById("recipe-results");
+    recipeResults.innerHTML = "";
+
+    matchingRecipes.forEach(recipe => {
+        const recipeCard = document.createElement("div");
+        recipeCard.classList.add("recipe-card");
+        recipeCard.innerHTML = `<h2>${recipe.name}</h2><p>${recipe.ingredients.join(", ")}</p>`;
+        recipeResults.appendChild(recipeCard);
+    });
+
+    ingredientInput.value = "";
+}
